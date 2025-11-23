@@ -76,18 +76,23 @@ body{
 .object img{
   width:180px;height:auto;display:block;user-select:none;pointer-events:none
 }
+/* ---------------- Socle ovale avec scintillement ---------------- */
 .object .base {
-  width: 140px;
-  height: 16px;
+  position: absolute;       /* bien positionné sous l’objet */
+  bottom: -8px;             /* ajuste la hauteur sous l’objet */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;              /* derrière l’objet */
+  width: 140px;             /* largeur de l’ovale */
+  height: 16px;             /* hauteur de l’ovale */
   background: radial-gradient(ellipse at center, rgba(0,0,0,0.35), rgba(0,0,0,0.05));
-  border-radius: 50%;
-  margin-top: -8px;
-  filter: blur(2px);
-  position: relative;
+  border-radius: 50%;       /* forme ovale */
+  filter: blur(2px);        /* ombre douce */
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
-/* Petite animation de scintillement */
+/* Animation subtile de scintillement */
 .object .base::after {
   content: "";
   position: absolute;
@@ -95,9 +100,10 @@ body{
   left: -40%;
   width: 40%;
   height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.15), rgba(255,255,255,0.0));
+  background: linear-gradient(120deg, rgba(255,255,255,0.15), rgba(255,255,255,0));
   transform: skewX(-25deg);
   animation: sparkle 2s infinite;
+  z-index: -1;              /* reste derrière l’objet */
 }
 
 @keyframes sparkle {
@@ -152,7 +158,6 @@ body{
       <!-- Objet 1 : chapeau -->
       <div class="object" id="obj-chapeau" tabindex="0" role="button" aria-pressed="false" aria-label="Haut-de-forme">
         <img src="chapeau.png" alt="Haut-de-forme ancien" />
-        <div class="couv" aria-hidden="true"></div>
         <div class="card" aria-hidden="true">
           <h4>Indice I</h4>
           <p>Où l’élégance s’expose, la lumière se déploie en miroir. » ou « L’élégance marche, et la lumière danse à ses côtés. </p>
@@ -164,7 +169,6 @@ body{
       <!-- Objet 2 : montre -->
       <div class="object" id="obj-montre" tabindex="0" role="button" aria-pressed="false" aria-label="Montre à gousset">
         <img src="montre.png" alt="Montre à gousset ancienne" />
-        <div class="couv" aria-hidden="true"></div>
         <div class="card" aria-hidden="true">
           <h4>Indice II</h4>
           <p>Les plumes et le velours conspirent pour retenir le regard. </p>
@@ -176,7 +180,6 @@ body{
       <!-- Objet 3 : valise -->
       <div class="object" id="obj-valise" tabindex="0" role="button" aria-pressed="false" aria-label="Valise ancienne">
         <img src="valise.png" alt="Valise ancienne en cuir" />
-        <div class="couv" aria-hidden="true"></div>
         <div class="card" aria-hidden="true">
           <h4>Indice III</h4>
           <p>Les costumes osent des couleurs que les yeux hésitent à suivre. </p>
