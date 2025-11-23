@@ -1,0 +1,1 @@
+# galamedecinebordeaux2026.github.io
