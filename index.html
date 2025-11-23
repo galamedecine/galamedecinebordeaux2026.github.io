@@ -50,10 +50,23 @@ body{
   position:fixed;inset:0;background:linear-gradient(rgba(10,8,6,0.55),rgba(10,8,6,0.65));
   display:flex;align-items:center;justify-content:center;padding:30px
 }
-.panel{
-  width:100%;max-width:1000px;background: rgba(115, 95, 70, 0.6)/* beige foncé transparent */;border:1px solid rgba(255,255,255,0.04);
-  padding:28px;border-radius:12px;backdrop-filter: blur(3px);
+.panel {
+  width: 100%;
+  max-width: 1000px;
+  padding: 28px;
+  border-radius: 12px;
+  backdrop-filter: blur(3px);
   box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.05);
+
+  /* fond vieux papier translucide avec texture et taches */
+  background-color: rgba(180, 160, 130, 0.65); /* beige foncé semi-transparent */
+  background-image: 
+    radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px),
+    radial-gradient(circle, rgba(0,0,0,0.02) 1px, transparent 1px),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><circle cx="30" cy="50" r="2" fill="rgba(0,0,0,0.03)"/><circle cx="120" cy="130" r="3" fill="rgba(0,0,0,0.04)"/><circle cx="80" cy="180" r="1.5" fill="rgba(0,0,0,0.02)"/><circle cx="160" cy="40" r="2.5" fill="rgba(0,0,0,0.03)"/></svg>');
+  background-size: 10px 10px, 15px 15px, cover;
+  background-blend-mode: overlay;
 }
 .header{
   display:flex;gap:20px;align-items:center;margin-bottom:16px
