@@ -134,6 +134,10 @@ body{
 /* tiny sparkle for subtle extravagance */
 .sparkle{position:absolute;width:36px;height:36px;right:8px;top:8px;opacity:0.0;transition:opacity .6s}
 .object:hover .sparkle{opacity:0.95;transform:rotate(8deg)}
+  /* sparkle disparaît quand la carte est ouverte */
+.object.open .sparkle {
+  opacity: 0 !important;
+}
 </style>
 </head>
 <body>
