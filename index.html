@@ -142,6 +142,49 @@ body{
 #obj-valise img {
   width: 210px;   /* tu peux augmenter ou réduire selon le rendu */
 }
+  /* --- VERSION MOBILE AMÉLIORÉE --- */
+@media (max-width: 640px) {
+
+  /* Réduit le panneau pour éviter les scrolls bizarres */
+  .panel {
+    padding: 14px;
+  }
+
+  /* Objets plus petits, espacés mais pas trop */
+  .object {
+    width: 150px;
+    height: 200px;
+  }
+
+  /* Images légèrement réduites */
+  .object img {
+    width: 120px;
+  }
+
+  /* Ombre adaptée */
+  .object .base {
+    width: 100px;
+    height: 12px;
+    bottom: -2px;
+  }
+
+  /* Carte (texte) adaptée pour éviter qu’elle déborde */
+  .card {
+    width: 160px;
+    top: 70px;
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  /* Sparkle plus petit pour éviter les chevauchements */
+  .sparkle {
+    width: 24px;
+    height: 24px;
+    right: 4px;
+    top: 4px;
+  }
+}
+
 </style>
 </head>
 <body>
