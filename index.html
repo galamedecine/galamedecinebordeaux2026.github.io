@@ -184,6 +184,25 @@ body{
     top: 4px;
   }
 }
+/* Layout spécial pour les téléphones */
+@media (max-width: 600px) {
+  .objects-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px; /* espace entre les objets */
+  }
+
+  .object {
+    width: 80px;   /* taille réduite pour téléphone */
+    height: auto;
+  }
+
+  .shadow {
+    width: 70px;
+    height: 25px;
+  }
+}
 
 </style>
 </head>
