@@ -59,14 +59,23 @@ body{
   box-shadow: 0 12px 40px rgba(0,0,0,0.6);
   border: 1px solid rgba(255,255,255,0.05);
 
-  /* fond vieux papier translucide avec texture et taches */
-  background-color: rgba(180, 160, 130, 0.65); /* beige foncé semi-transparent */
-  background-image: 
-    radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px),
-    radial-gradient(circle, rgba(0,0,0,0.02) 1px, transparent 1px),
-    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><circle cx="30" cy="50" r="2" fill="rgba(0,0,0,0.03)"/><circle cx="120" cy="130" r="3" fill="rgba(0,0,0,0.04)"/><circle cx="80" cy="180" r="1.5" fill="rgba(0,0,0,0.02)"/><circle cx="160" cy="40" r="2.5" fill="rgba(0,0,0,0.03)"/></svg>');
-  background-size: 10px 10px, 15px 15px, cover;
+  /* Fond vieux papier avec plis, taches et nuances */
+  background-color: rgba(190, 160, 120, 0.65); /* beige foncé semi-transparent */
+  background-image:
+    /* léger dégradé diagonal pour nuances */
+    linear-gradient(140deg, rgba(210, 180, 140, 0.15) 0%, rgba(160, 130, 90, 0.15) 100%),
+    
+    /* taches et grains sombres */
+    radial-gradient(circle at 15% 20%, rgba(0,0,0,0.03) 1%, transparent 2%),
+    radial-gradient(circle at 60% 75%, rgba(0,0,0,0.02) 1%, transparent 2%),
+    radial-gradient(circle at 80% 40%, rgba(0,0,0,0.025) 1%, transparent 2%),
+    
+    /* petites zones plus claires pour effet pli / usure */
+    radial-gradient(circle at 25% 60%, rgba(255,255,255,0.03) 1%, transparent 2%),
+    radial-gradient(circle at 70% 30%, rgba(255,255,255,0.02) 1%, transparent 2%);
+    
   background-blend-mode: overlay;
+  background-size: cover;
 }
 .header{
   display:flex;gap:20px;align-items:center;margin-bottom:16px
