@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Salon Chronosphérique — Indices</title>
+<!--
+Fichier prêt pour GitHub Pages : index.html
+
+REMARQUES / UTILISATION
+1) Crée un dépôt public GitHub nommé : votrenom.github.io
+2) Ajoute ce fichier index.html (Upload ou commit) à la racine du repo
+3) Ajoute les images listées ci-dessous dans le même dossier (ou adapte les chemins)
+4) Va sur https://votrenom.github.io pour voir le site en ligne
+
+Fichiers image recommandés (noms utilisés ici) :
+- fond.jpg       -> fond vintage (papier peint + engrenages)
+- chapeau.png    -> haut-de-forme victorien (fond transparent)
+- montre.png     -> montre à gousset (fond transparent)
+- valise.png     -> valise ancienne (fond transparent)
+- optional: small-sparkle.png (petit éclat discret)
+
+PERSONNALISATION
+- Change les textes d'indice dans les divs .carte
+- Pour ajouter sonorité, décommente la balise audio et le code JS associé
+
+Licence : tu peux modifier / réutiliser ce code
+-->
+
+<style>
+:root{
+  --gold: #b7904a;
+  --dark: #2d2520;
+  --cream: #f6efe6;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background-color:var(--dark);
+  color:var(--cream);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background-image: url('fond.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+.overlay{
+  position:fixed;inset:0;background:linear-gradient(rgba(10,8,6,0.55),rgba(10,8,6,0.65));
+  display:flex;align-items:center;justify-content:center;padding:30px
+}
+.panel{
+  width:100%;max-width:1000px;background:rgba(23,18,16,0.25);border:1px solid rgba(255,255,255,0.04);
+  padding:28px;border-radius:12px;backdrop-filter: blur(3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+}
+.header{
+  display:flex;gap:20px;align-items:center;margin-bottom:16px
+}
+.frame{
+  border:2px solid rgba(183,144,74,0.12);padding:14px;border-radius:8px;background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.08));
+}
+.title{font-size:1.8rem;color:var(--cream);margin:0}
+.subtitle{color:rgba(255,255,255,0.75);margin:0;font-size:0.95rem}
+.description{
+  margin-top:14px;color:rgba(255,255,255,0.85);line-height:1.45;font-size:1.02rem;
+  background: linear-gradient(90deg, rgba(0,0,0,0.08), rgba(0,0,0,0.02));padding:12px;border-radius:8px
+}
+.room{
+  margin-top:26px;display:flex;gap:28px;justify-content:center;flex-wrap:wrap;align-items:flex-end
+}
+.object{
+  width:220px;height:240px;position:relative;cursor:pointer;perspective:900px;display:flex;flex-direction:column;align-items:center
+}
+.object img{
+  width:180px;height:auto;display:block;user-select:none;pointer-events:none
+}
+.object .base{
+  width:100%;height:40px;background:linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.35));border-radius:6px;margin-top:-6px
+}
+.couv{
+  position:absolute;left:50%;transform:translateX(-50%);top:6px;width:200px;height:120px;transform-origin:top center;border-radius:6px;transition:transform .8s cubic-bezier(.2,.9,.2,1), box-shadow .3s
+}
+.card{
+  position:absolute;left:50%;transform:translateX(-50%);top:90px;width:180px;padding:14px;background:rgba(244,239,231,0.98);color:#1a1a1a;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.5);opacity:0;transform-origin:center;transition:opacity .6s ease, transform .6s ease
+}
+.object.open .couv{transform:rotateX(-160deg);box-shadow:0 20px 40px rgba(0,0,0,0.45)}
+.object.open .card{opacity:1;transform:translate(-50%,0) scale(1)}
+.card h4{margin:0 0 8px 0;font-size:1rem}
+.card p{margin:0;font-size:0.95rem;color:#222;line-height:1.4}
+.hint{font-size:0.85rem;color:rgba(255,255,255,0.7);margin-top:10px;text-align:center}
+.footer{margin-top:18px;color:rgba(255,255,255,0.6);font-size:0.9rem;text-align:center}
+
+/* small responsive tweaks */
+@media (max-width:640px){
+  .panel{padding:18px}
+  .object{width:170px}
+  .object img{width:140px}
+}
+
+/* tiny sparkle for subtle extravagance */
+.sparkle{position:absolute;width:36px;height:36px;right:8px;top:8px;opacity:0.0;transition:opacity .6s}
+.object:hover .sparkle{opacity:0.95;transform:rotate(8deg)}
+</style>
+</head>
+<body>
+
+<div class="overlay">
+  <div class="panel" role="main">
+    <div class="header">
+      <div class="frame">
+        <h1 class="title">Salon Chronosphérique</h1>
+        <p class="subtitle">Un cabinet vintage où le temps hésite.</p>
+      </div>
+    </div>
+
+    <div class="description" id="intro">
+      « Bienvenue, voyageur du temps…<br>
+       Ici, les époques se mêlent, les aiguilles hésitent, et les objets retiennent un éclat presque… excessif. <br>
+       Trois artefacts vibrent d’une singulière promesse. Approchez, mais avec prudence : certains secrets n’attendent que d'être effleurés pour se révéler. »
+    </div>
+
+    <div class="room" aria-label="objets interactifs">
+
+      <!-- Objet 1 : chapeau -->
+      <div class="object" id="obj-chapeau" tabindex="0" role="button" aria-pressed="false" aria-label="Haut-de-forme">
+        <img src="chapeau.png" alt="Haut-de-forme ancien" />
+        <div class="couv" aria-hidden="true"></div>
+        <div class="card" aria-hidden="true">
+          <h4>Indice I</h4>
+          <p>On murmure des noms empruntés au passé, et une couleur parfois trop vive sur les lettres. Observe les initiales.</p>
+        </div>
+        <div class="base"></div>
+        <img class="sparkle" src="small-sparkle.png" alt="" aria-hidden="true" />
+      </div>
+
+      <!-- Objet 2 : montre -->
+      <div class="object" id="obj-montre" tabindex="0" role="button" aria-pressed="false" aria-label="Montre à gousset">
+        <img src="montre.png" alt="Montre à gousset ancienne" />
+        <div class="couv" aria-hidden="true"></div>
+        <div class="card" aria-hidden="true">
+          <h4>Indice II</h4>
+          <p>Un chiffre résonne plus fort que les autres — parfois pair, parfois impair. Note la position des aiguilles embuées.</p>
+        </div>
+        <div class="base"></div>
+        <img class="sparkle" src="small-sparkle.png" alt="" aria-hidden="true" />
+      </div>
+
+      <!-- Objet 3 : valise -->
+      <div class="object" id="obj-valise" tabindex="0" role="button" aria-pressed="false" aria-label="Valise ancienne">
+        <img src="valise.png" alt="Valise ancienne en cuir" />
+        <div class="couv" aria-hidden="true"></div>
+        <div class="card" aria-hidden="true">
+          <h4>Indice III</h4>
+          <p>Des étiquettes arrachées, un ruban rouge qui refuse de partir — parfois la réponse se cache dans le pluriel des mots.</p>
+        </div>
+        <div class="base"></div>
+        <img class="sparkle" src="small-sparkle.png" alt="" aria-hidden="true" />
+      </div>
+
+    </div>
+
+    <div class="footer">Clique sur un objet pour l'effleurer. Les indices sont subtils — lis entre les lignes.</div>
+  </div>
+</div>
+
+<!-- Optional sound: uncomment & add sound file to repo, and un-comment JS code that plays it on open -->
+<!-- <audio id="openedSound" src="open-sound.mp3" preload="auto"></audio> -->
+
+<script>
+// Accessibility: allow keyboard open (Enter / Space)
+function toggleObject(el){
+  const isOpen = el.classList.toggle('open');
+  el.setAttribute('aria-pressed', isOpen ? 'true' : 'false');
+  // play sound if any
+  // if(isOpen) document.getElementById('openedSound').play();
+}
+
+// attach events
+[ 'obj-chapeau','obj-montre','obj-valise'].forEach(id=>{
+  const el = document.getElementById(id);
+  el.addEventListener('click', ()=> toggleObject(el));
+  el.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleObject(el); }
+  });
+});
+
+// Small UX: close others when one opens
+function toggleObject(el){
+  const objects = document.querySelectorAll('.object');
+  objects.forEach(o=>{ if(o!==el) o.classList.remove('open'); });
+  const isOpen = el.classList.toggle('open');
+  el.setAttribute('aria-pressed', isOpen ? 'true' : 'false');
+}
+</script>
+
+</body>
+</html>
